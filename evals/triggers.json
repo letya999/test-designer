@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Which cases should cover export cancellation?",
+    "should_trigger": true
+  },
+  {
+    "query": "Design a minimal regression test plan for native app restore after process death.",
+    "should_trigger": true
+  },
+  {
+    "query": "What should assertions verify for the new invoice retry behavior?",
+    "should_trigger": true
+  },
+  {
+    "query": "Review these already-written tests for self-checking mocks and naming.",
+    "should_trigger": false
+  },
+  {
+    "query": "Run the existing test suite and report failures.",
+    "should_trigger": false
+  },
+  {
+    "query": "Calculate the sample size for a marketing A/B experiment.",
+    "should_trigger": false
+  }
+]

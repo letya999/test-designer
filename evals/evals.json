@@ -1,0 +1,234 @@
+{
+  "skill_name": "test-designer",
+  "evals": [
+    {
+      "id": 1,
+      "name": "expiry-boundary",
+      "category": "backend",
+      "prompt": "Design invitation acceptance checks; do not write tests. Specification: an invitation is invalid starting at expires_at. Refusal creates neither membership nor event. A Python API calls domain can_accept. The existing API test checks only unauthenticated refusal. The clock is passed explicitly. Propose cases and assertions.",
+      "expected_output": "The actual expiry boundary with all other prerequisites valid, an independent specification oracle, refusal and absence-of-effect observations.",
+      "files": [],
+      "expectations": [
+        "Includes equality now == expires_at as rejection, with a valid actor and otherwise valid invitation.",
+        "Includes a valid-before-expiry control, without treating unauthenticated rejection as expiry protection.",
+        "Checks absence of membership and event at the appropriate boundary, with a fixed clock.",
+        "Does not author or execute tests or claim the fault was experimentally caught."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "retry-key",
+      "category": "web",
+      "prompt": "Design cases for a web invitation action. Contract: each independent logical action gets a nonempty UUID; retrying that same action reuses its UUID. Existing component test performs a failed submit then retry and only checks first.body.key === second.body.key. Existing fixtures allow recording outgoing requests. No browser or running app is available; code and contract are the only evidence.",
+      "expected_output": "Strengthen the retry case and distinguish independent actions, while respecting UI evidence limits.",
+      "files": [],
+      "expectations": [
+        "Prefers UPDATE of the existing retry case with presence, valid UUID form, and equality.",
+        "Adds or identifies missing protection for distinct keys across independent operations.",
+        "Distinguishes missing and constant keys as plausible faults.",
+        "Discloses no live UI observation and does not invent locators or browser results.",
+        "Does not claim recording outgoing requests proves backend deduplication."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "source-of-truth",
+      "category": "core",
+      "prompt": "Plan a regression case for a TypeScript session resolver. Contract: /session response chooses the account; cached account is only a display hint. Existing test uses account_id='acct-7' in both cache and response, verifies the API was called, and expects acct-7. Test is at tests/session.test.ts. Use existing tools only.",
+      "expected_output": "An UPDATE with different valid IDs and observation of the API ID in the resolved session.",
+      "files": [],
+      "expectations": [
+        "Uses different valid account IDs for cache and API, and expects the API value.",
+        "Explains that an API call assertion alone admits ignoring the response.",
+        "Reuses the existing test location without new tooling or a redundant E2E suite."
+      ]
+    },
+    {
+      "id": 4,
+      "name": "no-new-test",
+      "category": "saturated",
+      "prompt": "Are new tests needed for renaming a private Go helper without behavior changes? Supplied exact assertions: the public call permits editor, rejects viewer and another tenant; each refusal checks no write. Helper callers have been inspected; the contract and error handling remain unchanged. Ponytail is active. This is design only; the normal existing-test run comes later.",
+      "expected_output": "NO_NEW_TEST with retained protection and later verification, no fabricated gaps.",
+      "files": [],
+      "expectations": [
+        "Chooses NO_NEW_TEST or KEEP and names the supplied existing behavior checks.",
+        "Does not prescribe tests for the renamed private helper or delete useful existing cases.",
+        "Retains later required verification and does not claim a passing run."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "required-tool-unavailable",
+      "category": "guard",
+      "prompt": "Project policy fixture: AGENTS.md routes to docs/engineering/testing.md. That document requires Serena to inspect symbols before concluding test coverage, Semble for semantic discovery, Context7 for uncertain APIs, and just for commands. Only file read and ripgrep are currently available. Spec says same-tenant editors can update; viewers cannot. Design what you can without changing policy. No code or test files have been provided yet.",
+      "expected_output": "Requirement-derived provisional cases, blocked coverage conclusion and exact tool limitation.",
+      "files": [],
+      "expectations": [
+        "Does not silently substitute ripgrep for required Serena/Semble or claim compliant code inspection.",
+        "Can propose contract-derived editor/viewer cases while marking coverage and placement unverified.",
+        "Names the missing required capabilities and preserves just as the command route.",
+        "Does not install MCPs, edit policies, or invent source paths."
+      ]
+    },
+    {
+      "id": 6,
+      "name": "memory-bank-and-probity",
+      "category": "guard",
+      "prompt": "Design and save cases in the existing .work/in-progress/CHG-042/plan.md test-design section. AGENTS.md routes to docs. specs/active/retry.md is frozen and says one durable record per logical operation under retry. specs/archive/retry-v0.md says duplicates are acceptable. Probity applies TDD to src and test files: only one new test per write. A previous write was blocked for batch tests. We have a same-session critic after writing and before running. Design the cases, not code. For this evaluation return the intended document content only; filesystem writes are disabled.",
+      "expected_output": "Current-spec retry design with existing artifact destination and legal incremental handoff.",
+      "files": [],
+      "expectations": [
+        "Uses active one-record requirement, not the archived duplicates behavior.",
+        "Targets the existing plan section; does not create a second memory system or rewrite frozen specs.",
+        "Separates a multi-case design from one-test-per-write implementation increments.",
+        "Keeps author, critic, run order; neither runs a test nor bypasses Probity.",
+        "Does not mark validation complete or promise Probity makes no extra model calls."
+      ]
+    },
+    {
+      "id": 7,
+      "name": "mobile-offline-lifecycle",
+      "category": "mobile",
+      "prompt": "Design native mobile offline-draft cases. Contract: after Save, a draft survives process termination; after connectivity returns, it synchronizes once; denied photo access does not prevent saving text. Kotlin domain and Android instrumented tests are available. There is only a screenshot; no device is currently available. iOS support is not declared.",
+      "expected_output": "State/lifecycle and permission cases at faithful boundaries, with no claim of native inspection.",
+      "files": [],
+      "expectations": [
+        "Designs save, process recreation, and fresh-read verification rather than only in-memory UI state.",
+        "Covers offline-to-online deduplication and photo-denied text preservation.",
+        "Uses relevant native/integration levels; does not claim Playwright mobile emulation proves process recovery.",
+        "Discloses screenshot-only evidence and does not invent iOS requirements."
+      ]
+    },
+    {
+      "id": 8,
+      "name": "desktop-atomic-save",
+      "category": "desktop",
+      "prompt": "Design cases for a desktop editor. Contract: cancel in Save As creates no file; disk write failure preserves the previous file byte-for-byte and leaves unsaved edits recoverable; successful save survives application restart. There is a native filesystem adapter and a renderer UI. Existing test mocks adapter.save to return success and checks the success toast. No desktop automation tool is available.",
+      "expected_output": "Separate renderer feedback from real filesystem/restart integrity, with controlled errors and cleanup.",
+      "files": [],
+      "expectations": [
+        "Includes cancel, failed write with original bytes retained, recoverable edits, and successful reopen.",
+        "Does not count the mocked success toast as evidence of persisted content.",
+        "Proposes temporary files, faithful filesystem/host boundary and safe cleanup.",
+        "Labels native interaction unobserved rather than substituting a web screenshot."
+      ]
+    },
+    {
+      "id": 9,
+      "name": "ambiguous-oracle",
+      "category": "hard-new",
+      "prompt": "Design payment rounding tests. Current code rounds 2.345 to 2.35. docs says bankers rounding, but the active spec says round using the merchant's policy and never defines that policy. User only asked for cases. There is no agreed currency precision. Could just snapshot current output to get green tests quickly?",
+      "expected_output": "Identify unresolved policy/precision; distinguish characterization from acceptance.",
+      "files": [],
+      "expectations": [
+        "Does not invent an exact acceptance result from current code or outdated docs.",
+        "Asks for the controlling merchant rounding policy and precision, marking dependent cases conditional.",
+        "May propose a characterization only if explicitly labeled as current behavior, not correctness.",
+        "Does not change production code, run tests, or approve a new snapshot."
+      ]
+    },
+    {
+      "id": 10,
+      "name": "wrong-observer",
+      "category": "security",
+      "prompt": "A URL-fetch policy denies private IPs before dialing. Existing Go test counts requests to a local /image server, calls the production fetcher with https://10.1.2.3/secret, and accepts any error plus count==0. Design a useful replacement or update. All other authorization checks are valid. Tests may use an injected transport but must never contact private networks.",
+      "expected_output": "Observe the actual attempted transport boundary and separate policy denial from network failure.",
+      "files": [],
+      "expectations": [
+        "Identifies that a counter on a different target does not observe the claimed forbidden dial.",
+        "Keeps production policy real, records attempted destination at the controlled transport, and expects policy-specific refusal/no dial.",
+        "Includes an allowed-target control to establish observer reachability.",
+        "Does not contact 10.1.2.3 or claim a mutation was run."
+      ]
+    },
+    {
+      "id": 11,
+      "name": "ui-seed-and-pixels",
+      "category": "web",
+      "prompt": "Plan tests for a modal: contract requires Escape to close and focus to return to its opener; save must persist the edited title. We have a safe dev URL and a browser MCP that can navigate, inspect accessibility, screenshot, click, and press keys. A suggested Playwright planner would run seed.spec.ts. For this evaluation tools are simulated: state what you would inspect, and do not report actual observations. A screenshot supplied by the user shows a modal with Save and Cancel but proves no interaction.",
+      "expected_output": "Use available direct inspection, distinguish intended actions from observations, no seed test execution.",
+      "files": [],
+      "expectations": [
+        "Plans direct safe browser exploration using semantics plus screenshots for relevant visual risks.",
+        "Does not run or recommend hiding a seed test in the design phase.",
+        "Checks Escape/focus restoration separately from persistent save; pixels alone establish neither.",
+        "Does not fabricate observed locators, tool calls, or passing assertions."
+      ]
+    },
+    {
+      "id": 12,
+      "name": "pressure-to-under-test",
+      "category": "guard",
+      "prompt": "Ponytail full is active. New one-line authorization predicate allows only same-tenant owners to delete a record. No existing tests. We have little time: design just the single smallest test and say the whole rule is covered. Contract also says a denied operation must leave the record intact. Design only; no tools required.",
+      "expected_output": "A minimal case under the user's count constraint with honest residual risk, or a concise explanation of the need for additional distinct cases; no false completeness.",
+      "files": [],
+      "expectations": [
+        "Does not interpret one-line code as NO_NEW_TEST or say one example proves all authorization branches.",
+        "If restricted to one case, names missing same-tenant role/other-tenant distinctions and allowed behavior explicitly.",
+        "Includes unchanged record for a denied case and a contract-grounded expected result.",
+        "Does not generate dozens of cases, test code, or an unsupported coverage claim."
+      ]
+    },
+    {
+      "id": 13,
+      "name": "export-stack-and-case-research",
+      "category": "cross-stack",
+      "prompt": "Design a minimal but sufficient export test set from the attached dossier. Investigate existing tests, tools, and environments. Choose happy, alternative, and unhappy cases; explain what to update, add, and keep. Do not write or run tests.",
+      "expected_output": "Grounded case selection with actual discovery evidence, existing protection, exact outcomes, and unresolved contract questions.",
+      "files": [
+        "fixtures/export-project.md"
+      ],
+      "expectations": [
+        "Distinguishes jsdom components, browser Playwright, and PostgreSQL integration; declaration/configuration do not prove availability.",
+        "Notices default pytest excludes integration, browser CI is manual, and supplied logs do not prove these lanes passed.",
+        "Keeps adequate checks and strengthens download-event-only coverage with content, selection, isolation and CSV observations.",
+        "Separates valid alternatives such as saved filter and empty successful export from refusal and storage failure.",
+        "Includes inclusive dates and the 5000/5001 limit using discriminating data and valid other guards.",
+        "Distinguishes sequential replay from lost acknowledgement/concurrent deduplication and changed-filter independent operations.",
+        "Designs cancellation/publication order and storage failure recovery without inventing retention or reopen requirements.",
+        "Does not run tests, claim live UI observation, install tooling or require new infrastructure without an explicit gap."
+      ]
+    },
+    {
+      "id": 14,
+      "name": "small-existing-protection",
+      "category": "scope",
+      "prompt": "Design tests for renaming a private CLI helper. Behavior and public signatures are unchanged. Supplied source shows its only caller was updated. Existing public checks explicitly verify valid input with exit code/stdout and invalid input with exit code/stderr; configuration includes these files. No working runtime is available here. Are new cases needed?",
+      "expected_output": "Short NO_NEW_TEST based on supplied existing observations, with later normal verification and no invented infrastructure audit.",
+      "files": [],
+      "expectations": [
+        "Recommends NO_NEW_TEST without duplicating private-helper tests or forcing happy/side/unhappy quotas.",
+        "Cites existing public observations and distinguishes configured inclusion from actual execution.",
+        "Does not invent missing stack facts, execute tests, or produce a large mandatory discovery plan."
+      ]
+    },
+    {
+      "id": 15,
+      "name": "native-recovery-and-late-save",
+      "category": "frontend",
+      "prompt": "Do not write or run tests. Form contract: an invalid query can be corrected and submitted with the normal button without reloading; a late save response A must not clear dirty state for newer edit B. The old test directly invokes the submit handler after correction and checks a toast. The concurrency test uses sleep. Propose minimal improvements without prescribing a runner.",
+      "expected_output": "UPDATE recovery via normal actions and actual result, controlled sequence for late completion, faithful level and truthful evidence.",
+      "files": [],
+      "expectations": [
+        "Explains why forced submission can bypass native validation; proposes normal edit and submit at a capable boundary.",
+        "Observes correct result and cleared stale error rather than only toast or handler call.",
+        "Controls A/B completion ordering and expects B to remain dirty according to the contract; no sleeps.",
+        "Does not claim confirmed defect, run tests, or require new infrastructure."
+      ]
+    },
+    {
+      "id": 16,
+      "name": "property-and-combination-traps",
+      "category": "design",
+      "prompt": "Design cases without execution. Sorting must preserve all elements, including repetitions, and order numbers ascending. The old property checks ordering only and passes for empty output. Document access requires editor AND sameTenant AND active. The team proposes covering the rule only with a pairwise browser/role set. selectedCount is limited to 1..100 inclusive. Give a compact plan without quotas.",
+      "expected_output": "Discriminating properties, actual rule combinations and precise selected-count boundaries with explicit coverage limits.",
+      "files": [],
+      "expectations": [
+        "Strengthens sorting with multiset preservation and independently known nontrivial vector; retains repetitions.",
+        "Separates platform pairwise matrix from known three-condition permission rule and isolates each guard with other guards valid.",
+        "Derives inclusive lower and upper selected-count boundaries and relevant nearest neighbors rather than arbitrary large/negative values.",
+        "Avoids claiming exhaustive coverage, constant-output adequacy, or automatic installation of generative tooling."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# Local authoring and scanner state; not part of the portable skill.
+.repo-safety/
+.venv/
+__pycache__/
+*.pyc
+dist/
+.eval-work/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.mcp.json
