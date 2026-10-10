@@ -33,7 +33,28 @@ claim and no blanket scanner bypass was added.
 ## Scope of evidence
 
 These checks concern repository structure, publication plumbing and the distributable,
-not model effectiveness. GitHub hosting/settings/CI and remote CLI discovery must be
-verified after publication; local checks do not establish them. skills.sh listing
-depends on actual CLI install telemetry/indexing and is not guaranteed by publication.
+not model effectiveness. skills.sh listing depends on actual CLI install telemetry/
+indexing and is not guaranteed by publication.
 No private source-project content or local scanner state is included in the payload.
+
+## Verified publication
+
+- Public repository: [letya999/test-designer](https://github.com/letya999/test-designer),
+  default branch `dev`, distribution branch `main`, MIT license and searchable topics.
+- [Linux CI run](https://github.com/letya999/test-designer/actions/runs/38037455958)
+  passed for `a8657ab`: all seven authoring tests ran without skips, including allowed
+  same-repository dev and rejected alternative/fork source cases. Packaging, Bandit,
+  whitespace and the full-history Gitleaks scan passed.
+- GitHub API confirmed secret scanning, push protection, private vulnerability
+  reporting and automatic dependency security fixes enabled. Dependabot opened an
+  update PR; no automatic dependency merge is configured.
+- `main` protection requires `validate` and `main-source-policy` from the GitHub Actions
+  app, an up-to-date branch, a PR and resolved review conversations. It applies to
+  administrators; force pushes and branch deletion are disabled. No approval-count
+  requirement is imposed on the single-maintainer promotion flow.
+- Remote `skills add letya999/test-designer --list` found exactly one skill with the
+  expected name and description. This was discovery only, not a global installation
+  or evidence of a skills.sh catalog entry.
+- Real promotion execution remains a separate check from the local source-policy
+  test. The first publication PR will exercise the trusted workflow and required
+  statuses before merging into `main`.
