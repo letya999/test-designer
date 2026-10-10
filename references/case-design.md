@@ -73,6 +73,8 @@ controls which event wins at the publish boundary; arbitrary delays prove little
 ### Select without hiding omissions
 
 First match each candidate to existing assertions: KEEP, UPDATE, ADD, or NO_NEW_TEST.
+These classify the scenario plan. UPDATE specifies the planned observation/data change
+for the writer; it is not a review verdict or an edit to authored test code.
 Then order distinct gaps by consequence, likelihood/exposure, recent change, and
 diagnostic value. Use the project's priorities; qualitative reasons usually suffice.
 Security isolation, data loss, irreversible effects, and known regression witnesses
@@ -86,11 +88,12 @@ complete coverage. Name deferred cases, why they can wait, and what would requir
 
 Case card, adapted to the project's format:
 
-> **UPDATE/ADD — name · family · priority reason**  
-> Contract/source and credible fault. Concrete initial state and distinguishing data.  
-> Action/sequence → required result and forbidden effects, observed at named boundary.  
+> **UPDATE/ADD — scenario name or existing ID · family · priority reason**\
+> Contract/source/status and credible fault; unresolved conflicting sources.\
+> Concrete initial state and distinguishing data.\
+> Action/sequence → required result and forbidden effects, observed at named boundary.\
 > Level/location; real subject and allowed doubles; fixture/environment and
-> synchronization/cleanup where needed. Unresolved expectation or prerequisite.
+> completion/settling criteria, isolation and cleanup where needed. Unresolved prerequisite.
 
 Do not repeat identical environment notes in every card or require every field for
 a trivial case. A proposed test location must be labeled proposed, not discovered.

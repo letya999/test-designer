@@ -72,8 +72,9 @@ a real browser where required. Keep a handler-only case labeled handler-only.
 ### Idempotency: “same token” -> “one effect for one operation”
 
 Weak: equality of two tokens also passes for two missing values. Stronger: valid
-nonempty key, same key on retry, distinct key for distinct operation. This proves
-client key handling. Server protection needs a separate durable-effect observation
+nonempty key, same key on retry, distinct key for distinct operation. This targets
+client key handling; a design does not prove its implementation. Server protection
+needs a separate durable-effect observation
 after lost response or controlled concurrent retry, with payload/key semantics
 specified by contract. Never infer concurrent safety from sequential calls alone.
 
@@ -95,14 +96,17 @@ Gap or uncertainty -> next useful read/observation:
 ### Case card
 
 ```text
-KEEP / UPDATE / ADD / NO_NEW_TEST — name; path family
+KEEP / UPDATE / ADD / NO_NEW_TEST — scenario name or existing ID; path family
+Decision applies to the scenario plan, not an ACCEPT/REVISE verdict on test code.
 Contract + risk / credible wrong behavior:
 Given: reachable state, discriminating data, valid other guards
 When: ordinary action or controlled event sequence
-Then: exact required observations + forbidden effects; oracle source
+Then: exact required observations + forbidden effects
+Oracle source + status: accepted contract / characterization / unknown
+Conflicting sources and missing decision, without choosing a winner:
 Why it distinguishes the fault / existing protection:
 Boundary + proposed/existing location; real subject and dependency doubles:
-Environment, synchronization, isolation/cleanup if material:
+Completion/settling criteria; environment, synchronization, isolation/cleanup if material:
 Unresolved decision / unverified prerequisite:
 ```
 

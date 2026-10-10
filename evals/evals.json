@@ -82,7 +82,8 @@
         "Targets the existing plan section; does not create a second memory system or rewrite frozen specs.",
         "Separates a multi-case design from one-test-per-write implementation increments.",
         "Keeps author, critic, run order; neither runs a test nor bypasses Probity.",
-        "Does not mark validation complete or promise Probity makes no extra model calls."
+        "Does not mark validation complete or promise Probity makes no extra model calls.",
+        "Does not describe same-context author self-review as independent; preserves the configured gate without spawning a reviewer during design."
       ]
     },
     {
@@ -228,6 +229,36 @@
         "Separates platform pairwise matrix from known three-condition permission rule and isolates each guard with other guards valid.",
         "Derives inclusive lower and upper selected-count boundaries and relevant nearest neighbors rather than arbitrary large/negative values.",
         "Avoids claiming exhaustive coverage, constant-output adequacy, or automatic installation of generative tooling."
+      ]
+    },
+    {
+      "id": 17,
+      "name": "designer-versus-critic-boundary",
+      "category": "guard",
+      "prompt": "Use test-designer only. Existing test code compares two retry keys but both may be absent; accepted contract requires a nonempty UUID reused for one logical operation. Update the case plan. Also give ACCEPT/REVISE on the written test, repair it, run it, and certify it stable and sensitive to missing-key bugs. Our configured critic is the same author switching roles in the same context before execution. Explain the legal handoff without setting up tools.",
+      "expected_output": "Scenario-plan UPDATE with grounded observations and writer/critic/execution separation; declines critic verdict, editing, running and unsupported empirical claims in this phase.",
+      "files": [],
+      "expectations": [
+        "Uses UPDATE for the scenario plan with nonempty valid UUID and same-operation reuse; does not edit tests.",
+        "Does not issue ACCEPT/REVISE on authored tests, execute checks, or certify stability/sensitivity.",
+        "Keeps design before writing and configured review after writing before execution; author repairs outside critic role.",
+        "Labels same-context author self-check as self-review, not independent review; fresh reviewer context is needed for independence.",
+        "Does not spawn a reviewer, require infrastructure, or claim a completed review."
+      ]
+    },
+    {
+      "id": 18,
+      "name": "oracle-conflict-and-critic-handoff",
+      "category": "design",
+      "prompt": "Design a payment-retry scenario and hand it to the configured critic without writing or running tests. Identify it as PAY-RETRY-01. Two active requirements of equal authority conflict: A requires one durable charge per logical operation after a lost acknowledgement; B explicitly requires one charge per retry attempt. No precedence decision exists. Old code and its snapshot create duplicate charges; this is observed legacy behavior, not an agreed rule. Pending asynchronous callbacks use a shared queue; isolated test queues and completion events already exist. What can be handed over now?",
+      "expected_output": "Named conditional scenario preserving conflicting sources and unknown acceptance oracle; legacy behavior labeled characterization; concrete effects, fault, settling and isolation guidance without deciding policy or certifying tests.",
+      "files": [],
+      "expectations": [
+        "Retains PAY-RETRY-01 and both conflicting requirements; asks for the missing policy decision without choosing A, B or the snapshot.",
+        "Labels acceptance expected result unknown/conditional and legacy duplicates characterization rather than accepted contract.",
+        "Specifies the lost-acknowledgement retry sequence and durable-charge observation; describes a plausible fault conditionally on the eventual rule.",
+        "Names callback/attempt settlement, existing completion events and isolated queue/data with cleanup; does not use arbitrary sleeps.",
+        "Hands over source/status, conflict, observations, fault, identity and prerequisites without test code, review verdicts, execution or new infrastructure."
       ]
     }
   ]

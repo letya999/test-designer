@@ -1,13 +1,10 @@
 ---
 name: test-designer
+license: MIT
 description: >-
-  Research software behavior and design meaningful test cases before implementation,
-  across backend, web, mobile, desktop, CLI, and libraries. Use for test plans,
-  acceptance or regression scenarios, choosing happy/alternative/unhappy paths,
-  deciding what assertions should prove, or which cases to cover — even without
-  the words test design. Also use for case selection within an implementation task.
-  Not for reviewing already-written test code, running suites, repairing test
-  infrastructure, or statistical A/B experiments.
+  Design test cases and expected results. Use for test plans, acceptance/regression
+  scenarios, boundaries, error paths or "what to test", even within implementation
+  tasks. Not for writing/reviewing/running tests, infrastructure or A/B experiments.
 ---
 
 # Test Designer
@@ -23,7 +20,9 @@ This phase reads artifacts and explores an authorized safe UI. It produces a des
 it does not write test/production code, run tests or mutations, install tools, or
 change project policy. Save the design only when requested or required by the project.
 Inspect existing assertions to select cases; reviewing written test code as a
-deliverable remains a separate critic/review phase.
+deliverable remains a separate critic/review phase. Do not issue ACCEPT/REVISE
+verdicts on authored tests. KEEP/UPDATE/ADD/NO_NEW_TEST are scenario-plan decisions;
+UPDATE proposes changes to that plan, not a code review or permission to edit tests.
 For a larger authorized task, finish this phase and continue that task without a new
 approval gate. A configured critic belongs after test writing and before execution.
 
@@ -77,15 +76,18 @@ do not create five documents or a repository-wide audit to follow five steps.
   boundaries, valid other prerequisites, and observation of required/forbidden effects.
   Keep the subject real; a recorded mock call proves dispatch, not remote success.
 - Resolve material ambiguities rather than inventing business rules. Ask the focused
-  question and continue independent cases. Mark affected cases conditional/blocked.
+  question and continue independent cases. Preserve unresolved requirement conflicts
+  with their sources; do not choose a winner yourself. Mark affected cases conditional/blocked.
 
 ## Output
 
 Lead with the recommendation and the few stack/environment facts affecting it.
-For each ADD/UPDATE give a named case (and family), contract/risk, concrete setup and
-action/sequence, expected observations and their source, level and proposed/existing
-location, and the credible fault distinguished. Add fixture/double, synchronization,
-cleanup, and later execution prerequisites where they change implementation.
+For each ADD/UPDATE identify the scenario by name or the project's existing ID, family,
+contract/risk, concrete setup and action/sequence, expected observations and their source
+and status (accepted contract, characterization, or unknown), level/location, and
+credible fault distinguished. Include unresolved conflicts, completion/settling criteria,
+fixture/double, isolation/cleanup, and execution prerequisites where material. Follow
+the [critic handoff](references/project-context.md#test-critic-handoff) when review is configured.
 
 Use short case cards or a compact table; prefer the project's template. Do not squeeze
 long sequences into unreadable cells. Cite existing protection once and briefly explain
@@ -97,4 +99,5 @@ when they add no relevant distinction. Do not silently drop a high-impact unreso
 
 Close with decisions needed, unobserved surfaces, and the next phase. Distinguish source
 evidence, live observations, assumptions, and unverified claims. State that tests were
-not run in this design phase; never claim a passing suite or a killed mutation from a plan.
+not run in this design phase; never claim a passing suite, killed mutation, or proven
+stability/sensitivity from a plan. An author's self-check is not independent review.

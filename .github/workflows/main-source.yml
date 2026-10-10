@@ -1,0 +1,34 @@
+name: Main promotion policy
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  promotion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # Trusted base workflow only: never check out or execute PR content here.
+      - name: Require this repository's dev branch
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_REPO: ${{ github.repository }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          state=failure
+          if [[ "$HEAD_BRANCH" == dev && "$HEAD_REPO" == "$TARGET_REPO" ]]; then
+            state=success
+          fi
+          jq -n --arg state "$state" '{state: $state, context: "main-source-policy", description: "main accepts PRs only from this repository dev branch"}' > "$RUNNER_TEMP/promotion-status.json"
+          gh api --method POST "repos/$TARGET_REPO/statuses/$HEAD_SHA" --input "$RUNNER_TEMP/promotion-status.json" > /dev/null
+          test "$state" = success

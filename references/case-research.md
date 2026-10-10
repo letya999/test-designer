@@ -126,6 +126,8 @@ input/state/action and expected observation, or identify the missing decision.
 Read assertions and data at the actual boundary. Classify current protection as adequate,
 weak, absent, or unknown. These are source-based design judgments unless matching
 execution evidence exists; they are not mutation-test results.
+They inform scenario selection, not ACCEPT/REVISE verdicts on authored tests or
+claims of proven stability/sensitivity. UPDATE here changes the plan for the writer.
 
 | Question | Effect on the plan |
 |---|---|

@@ -91,7 +91,29 @@ perform its own calls; do not promise that the entire surrounding setup is singl
 Pattern-based enforcement and AI enforcement are distinct deployment choices, not
 settings this skill changes.
 
-**Test Critic:** hand over contract references, chosen cases, relevant existing tests,
-assumptions, and intended observations. The critic reviews authored tests in the
-same session before execution if the workflow calls for it. Do not load, create,
-delegate to, or require a critic merely to finish a test design.
+## Test Critic handoff
+
+Design precedes writing; a configured critic reviews written tests before execution.
+The critic is a reviewer, not the author who fixes those tests. Corrections belong
+to the author outside the critic role, followed by further review as locally required.
+The designer does not issue ACCEPT/REVISE verdicts, execute tests, or certify their
+stability or sensitivity. UPDATE identifies a scenario-plan change for the writer.
+
+Hand over the following, using the project's format and only material detail:
+
+- Scenario name or existing ID and target behavior; relevant test location if known.
+- Expected-result source and status: accepted contract, characterization, or unknown.
+  Preserve conflicting sources and the missing decision instead of choosing a rule.
+- Reachable setup/actions, discriminating data, observable required/forbidden effects,
+  observation boundary, and the plausible defect the case should distinguish.
+- Completion/settling condition, ordering where relevant, isolated data/resources,
+  cleanup, doubles, and prerequisites that affect the observation's validity.
+- Existing protection, assumptions, unresolved gaps, and the limits of design evidence.
+
+Independent review requires a fresh reviewer context without the author's
+self-assessment presented as the verdict. Necessary code, contracts, and design
+evidence still accompany it. A role switch or an author's self-check in the same
+context is self-review, not independence; name that limit if it is the configured
+workflow. Fresh context reduces shared assumptions but does not prove correctness.
+Follow the host/project's review mechanism; do not introduce mandatory infrastructure,
+spawn a reviewer, or require a critic merely to complete this design phase.
