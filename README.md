@@ -4,6 +4,7 @@
 
 [![CI](https://github.com/letya999/test-designer/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/letya999/test-designer/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![skills.sh](https://skills.sh/b/letya999/test-designer)](https://skills.sh/letya999/test-designer)
 
 A portable [Agent Skill](https://agentskills.io/specification) for choosing tests
 that protect meaningful behavior before writing test code. It works across backend,
