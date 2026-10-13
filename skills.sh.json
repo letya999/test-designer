@@ -1,4 +1,13 @@
 {
   "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
-  "skills": ["test-designer"]
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Testing",
+      "description": "Design test cases and expected results before writing tests.",
+      "skills": [
+        "test-designer"
+      ]
+    }
+  ]
 }
